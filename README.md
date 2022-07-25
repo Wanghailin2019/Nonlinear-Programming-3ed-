@@ -1,2 +1,3 @@
 # Nonlinear-Programming-3ed-
 这是对MIT教授2016年出版的非线性规划第三版的中文翻译
+建议把md文档和pictures文件夹下载到本地之后，用typora打开，公式和图片的显示都比较正常！
