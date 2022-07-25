@@ -104,13 +104,15 @@ $$
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="C:\Users\Timothy\Desktop\非线性规划 中文翻译稿\文内图片\figure1-1-1.png" width="65%" alt="">
+    src="pictures\figure1-1-1.png" width="65%" alt="">
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
     padding: 2px;">无约束局部和全局最小（一维）</div>
 </center>
+
+
 
 
 
@@ -131,13 +133,15 @@ $$
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="C:\Users\Timothy\Desktop\非线性规划 中文翻译稿\文内图片\figure1-1-2.png" width="65%" alt="">
+    src="pictures\figure1-1-2.png" width="65%" alt="">
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
     padding: 2px;">在约束集X上的函数f的局部和全局最小</div>
 </center>
+
+
 
 
 局部和全局最大值的定义类似。特别的，如果$a^*$是函数 $-f$ 的无约束局部（全局）最小值，那么$a^*$是$f$的无约束局部（全局）最大值。
@@ -158,13 +162,101 @@ $$
 \nabla f(x^*)\prime \Delta x = \sum^n_{i=1}\frac{\partial f(x^*)}{\partial x_i} \Delta x_i \ge 0.
 $$
 
+特别是，通过将 $\Delta x$ 取为单位坐标向量的正负倍数（除一个等于 1 的坐标外，所有坐标都等于 0），我们分别得到 $\part f(x^*)/\part x_i\ge 0$ 和 $$\part f(x^*)/\part x_i\le 0$$，分对于所有$i=1,...,n$。等效地，我们有必要条件
+$$
+\nabla f(x^*)=0,
+$$
 
 
-p7
+【最初由费马于 1637 年在没有证明的短篇论文“Methodus as Disquirendam Maximam et Minimam”中提出】。这个条件在 Prop. 1.1.1 中得到正式证明，在下一小节中给出。
+
+在局部最小值 $x^*$ 处，对于小的变化 $\Delta x$，条件 $\nabla f(x^*)\Delta x\ge0$ 应该成立的想法更广泛地适用，包括凸约束集 $X$ 的问题，比如它采用如下形式：
+$$
+\nabla f(x^*)\prime (x-x^*)\ge 0, \ \ \forall x \in X
+$$
+ 对于凸成本函数的情况，此条件将在 Prop. 1.1.2 中给出。在第 3 章中，它将成为本章计算方法的约束版本的基础。
+
+我们还期望成本函数的二阶微分对于一个小的变换$\Delta x$也是非负的：
+$$
+\nabla f(x_*)\prime\Delta x + \frac{1}{2}\Delta x\prime\nabla^2f(x^*)\Delta x \ge 0.
+$$
+因为$\nabla f(x^*)\prime\Delta x = 0$，我们可以得到：
+$$
+\Delta x\prime\nabla^2f(x^*)\Delta x \ge 0, \ \  \forall \Delta x \in \Re^n
+$$
+也就是说：
+$$
+\nabla^2f(x^*)是半正定的
+$$
+我们将在下一小节（Prop. 1.1.1）中证明这个必要条件。附录 A 回顾了正定矩阵和半正定矩阵的定义和性质。
+
+在下文中，我们将满足条件 $\nabla f(x^*)=0$ 的向量 $x^*$ 称为*静止点*。
+
+**凸成本函数的情况**
+
+凸性在非线性规划中起着非常重要的作用。一个原因是当成本函数 $f$ 是凸的时，局部最小值和全局最小值之间没有区别；每个局部最小值也是全局的。这个想法如图 1.1.3 所示，形式证明在 Prop. 1.1.2 中给出。
+
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="pictures\figure1-1-3.jpg" width="55%" alt="">
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">图1.1.3 </div>
+</center>
 
 
 
+另一个重要的事实是，如果 $f$ 是凸的，则一阶条件 $\nabla f(x^*)=0$ 也足以达到最优性。这在Prop. 1.1.3 中确立。证明基于凸函数 $f$ 的基本性质：基于梯度的点 $x^*$的线性逼近，即 
+$$
+f(x^*)+\nabla f(x^*)\prime (x-x^*),
+$$
 
+
+ 低估了 $f(x)$，所以如果 $\nabla f(x^*)=0$，那么对于所有 $x,f(x^*)\le f(x)$（参见附录 B 中的 Prop. B.3）。
+
+**最优性的充分条件**
+
+如果 $f$ 不是凸的，则一阶和二阶必要条件可能无法保证 $x^*$ 的局部最优性。如图 1.1.4 所示。然而，通过加强二阶条件，我们得到了最有性的充分条件。
+
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="pictures\figure1-1-4.jpg" width="65%" alt="">
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">图1.1.4 </div>
+</center>
+
+特别的，考虑向量$x^*$满足一阶最优性的必要条件：
+$$
+\nabla f(x^*)=0, \tag{1.1}
+$$
+并且同时满足下面的二阶最优性的必要条件的加强形式：
+$$
+\nabla^2 f(x^*): positive\ definite,\tag{1.2}
+$$
+(比如：Hessian矩阵式正定的而不是半正定)。那么对于所有的$\Delta x \ne 0$ 我们有：
+$$
+\Delta x\prime\nabla^2 f(x^*) \Delta x > 0,
+$$
+隐含表示函数$f$在处的二阶导数的非零的小的变化量$\Delta x$是正值。
+
+意味着在 $x^*$ 处，由于小的非零变化 $\Delta x$ 导致的 $f$ 的二阶变化是正的。因此，$f$ 趋向于随着 $x^*$ 的小幅偏移而严格增加，这表明上述条件 (1.1) 和 (1.2) 足以满足 $x^*$ 的局部最优性。这确实在 Prop. 1.1.5 中确立。
+
+不满足正定充分条件（1.2）的局部最小值称为*奇异值*；否则它们被称为非奇异的。奇异的局部最小值更难处理有两个原因。首先，在 $f$ 没有凸性的情况下，它们的最优性无法使用易于验证的充分条件来确定。其次，在它们附近，最常用的优化算法的行为往往很慢或不稳定，正如我们将在后续部分中看到的那样。
+
+**二次成本函数** 
+
+考虑二次函数：
+
+
+
+其中 Q 是对称的 n x n 矩阵，b 是 Pr 中的向量。如果 a* 是 f 的局部最小值，则根据必要的最优性条件，我们必须有 Vf(2*) = 0x* - b = 0 V2f(2*) = Q ：半正定。因此，如果 Q 不是半正定的，则 f 可以没有局部最小值。如果 Q 是半正定的，f 是凸的 Prop. B.4(d) of Annex B]，所以任何满足一阶条件 Vf(a*) = Qa* b = 0 的向量 a* 都是 f 的全局最小值。另一方面，如果 Q 是奇异的，则可能不存在方程 Vf(r*) = Qa* - 6 = 0 的解。然而，如果 Q 是正定的（因此根据附录 A 的 Prop. A.20 是可逆的），方程 @x* b = 0 可以唯一求解，向量 2* = Q-16 是唯一的全局最小值.这与即将给出的 Prop. 1.1.3(a) 一致，该 Prop. 1.1.3(a) 断言严格凸函数最多可以有一个全局最小值 If 是严格凸的当且仅当 Q 是正定的；附录 B 的提案 B.4(d)]。图 1.1.5 说明了所考虑的各种特殊情况。二次成本函数在非线性规划中很重要，因为它们在应用程序中经常出现，但它们也很重要，还有另一个原因。从局部最小值附近的二阶展开
 
 
 
